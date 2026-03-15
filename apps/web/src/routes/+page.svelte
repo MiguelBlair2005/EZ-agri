@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { useQuery } from 'convex-svelte';
-	import { anyApi } from 'convex/browser';
+	import { anyApi } from 'convex/server';
 	import { Button, Card, CardContent, CardHeader, CardTitle, Badge, Slider } from '$lib/components/ui';
 	import { foodCategoryOptions } from '$lib/spoilage';
 

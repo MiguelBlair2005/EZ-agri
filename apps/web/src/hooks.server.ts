@@ -1,6 +1,6 @@
 import { sequence, type Handle } from '@sveltejs/kit/hooks';
 import { handleErrorWithSentry, sentryHandle } from '@sentry/sveltekit';
-import { workos, workosCookiePassword } from '$lib/server/workos';
+import { getWorkos, workosCookiePassword } from '$lib/server/workos';
 import { convexClient, serverKey } from '$lib/server/convex';
 import { env } from '$env/dynamic/private';
 
@@ -16,6 +16,7 @@ const authHandle: Handle = async ({ event, resolve }) => {
 
 	if (sealedSession) {
 		try {
+			const workos = getWorkos();
 			const session = await workos.userManagement.loadSealedSession({
 				sessionData: sealedSession,
 				cookiePassword: workosCookiePassword

@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { workos, workosClientId, getAuthRedirectUri } from '$lib/server/workos';
+import { getWorkos, workosClientId, getAuthRedirectUri } from '$lib/server/workos';
 import { env } from '$env/dynamic/private';
 import type { RequestHandler } from './$types';
 
@@ -13,6 +13,7 @@ export const GET: RequestHandler = async ({ cookies }) => {
 		maxAge: 60 * 10
 	});
 
+	const workos = getWorkos();
 	const authorizationUrl = workos.userManagement.getAuthorizationUrl({
 		clientId: workosClientId,
 		redirectUri: getAuthRedirectUri(),

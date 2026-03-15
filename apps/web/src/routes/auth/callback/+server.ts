@@ -1,6 +1,6 @@
 import { redirect, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { workos, workosClientId, workosCookiePassword } from '$lib/server/workos';
+import { getWorkos, workosClientId, workosCookiePassword } from '$lib/server/workos';
 import { convexClient, serverKey } from '$lib/server/convex';
 import { env } from '$env/dynamic/private';
 
@@ -15,6 +15,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 
 	cookies.delete('wos-state', { path: '/' });
 
+	const workos = getWorkos();
 	const { user, sealedSession } = await workos.userManagement.authenticateWithCode({
 		clientId: workosClientId,
 		code,

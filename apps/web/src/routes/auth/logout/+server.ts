@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { workos, workosCookiePassword } from '$lib/server/workos';
+import { getWorkos, workosCookiePassword } from '$lib/server/workos';
 import { env } from '$env/dynamic/private';
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
@@ -17,6 +17,7 @@ export const POST: RequestHandler = async ({ cookies, request }) => {
 		throw redirect(302, '/');
 	}
 
+	const workos = getWorkos();
 	const session = await workos.userManagement.loadSealedSession({
 		sessionData: sealedSession,
 		cookiePassword: workosCookiePassword
