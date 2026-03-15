@@ -15,6 +15,6 @@
     "dev:convex": "turbo run dev --filter=convex"
   },
   "devDependencies": {
-    "turbo": "^2.0.10"
+    "turbo": "^2.8.17"
   }
 }

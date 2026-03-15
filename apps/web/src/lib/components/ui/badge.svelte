@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	let { class: className = '', variant = 'default', ...rest } = $props();
+	let { children, class: className = '', variant = 'default', ...rest } = $props();
 
 	const variants = {
 		default: 'bg-primary text-primary-foreground',
@@ -18,5 +18,7 @@
 	)}
 	{...rest}
 >
-	<slot />
+	{#if children}
+		{@render children()}
+	{/if}
 </span>

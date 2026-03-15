@@ -11,4 +11,4 @@
 		className
 	)}
 	{...rest}
-/>
+></textarea>

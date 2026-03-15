@@ -17,20 +17,28 @@
 			<form method="POST" action="?/updateProfile" class="grid gap-4 md:grid-cols-2">
 				<input type="hidden" name="role" value={data.role} />
 				<div>
-					<label class="text-sm font-medium">Location</label>
-					<Input name="locationText" value={data.profile?.locationText ?? ''} required />
+					<label class="text-sm font-medium" for="location-text">Location</label>
+					<Input id="location-text" name="locationText" value={data.profile?.locationText ?? ''} required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Radius (miles)</label>
-					<Input name="radiusMiles" type="number" min="5" max="100" value={data.profile?.radiusMiles ?? 50} required />
+					<label class="text-sm font-medium" for="radius-miles">Radius (miles)</label>
+					<Input
+						id="radius-miles"
+						name="radiusMiles"
+						type="number"
+						min="5"
+						max="100"
+						value={data.profile?.radiusMiles ?? 50}
+						required
+					/>
 				</div>
 				<div>
-					<label class="text-sm font-medium">Latitude</label>
-					<Input name="lat" value={data.profile?.location?.lat ?? ''} required />
+					<label class="text-sm font-medium" for="lat">Latitude</label>
+					<Input id="lat" name="lat" value={data.profile?.location?.lat ?? ''} required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Longitude</label>
-					<Input name="lng" value={data.profile?.location?.lng ?? ''} required />
+					<label class="text-sm font-medium" for="lng">Longitude</label>
+					<Input id="lng" name="lng" value={data.profile?.location?.lng ?? ''} required />
 				</div>
 				<div class="md:col-span-2">
 					<Button size="sm">Update profile</Button>
@@ -115,7 +123,7 @@
 									<Badge variant="accent">{reservation.status}</Badge>
 								</div>
 								<p class="text-muted-foreground">
-									Qty {reservation.quantity} • Expires {new Date(reservation.expiresAt).toLocaleString()}
+									Qty {reservation.quantity} - Expires {new Date(reservation.expiresAt).toLocaleString()}
 								</p>
 								{#if reservation.status === 'active'}
 									<form method="POST" action="?/checkoutReservation" class="mt-3">
@@ -146,7 +154,7 @@
 									<Badge variant="muted">{order.status}</Badge>
 								</div>
 								<p class="text-muted-foreground">
-									Delivery: {order.deliveryStatus} • Total ${(order.totalAmountCents / 100).toFixed(2)}
+									Delivery: {order.deliveryStatus} - Total ${(order.totalAmountCents / 100).toFixed(2)}
 								</p>
 							</li>
 						{/each}

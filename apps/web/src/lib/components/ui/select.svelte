@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	let { class: className = '', ...rest } = $props();
+	let { children, class: className = '', ...rest } = $props();
 </script>
 
 <select
@@ -11,5 +11,7 @@
 	)}
 	{...rest}
 >
-	<slot />
+	{#if children}
+		{@render children()}
+	{/if}
 </select>

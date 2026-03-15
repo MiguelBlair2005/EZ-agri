@@ -15,6 +15,7 @@
 	};
 
 	let {
+		children,
 		class: className = '',
 		variant = 'default',
 		size = 'default',
@@ -33,5 +34,7 @@
 	)}
 	{...rest}
 >
-	<slot />
+	{#if children}
+		{@render children()}
+	{/if}
 </button>

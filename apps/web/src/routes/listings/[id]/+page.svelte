@@ -2,12 +2,18 @@
 	import { Button, Card, CardContent, CardHeader, CardTitle, Badge, Input } from '$lib/components/ui';
 	let { data } = $props();
 
-	let reserveQty = 1;
-	let offerQty = 1;
-	let offerPrice = (data.listing.pricePerUnitCents / 100).toFixed(2);
+	const listing = $derived(data.listing);
+	const isFarmer = $derived(
+		data?.profile?.role === 'farmer' && data.profile?._id === listing.farmerId
+	);
 
-	const listing = data.listing;
-	const isFarmer = data?.profile?.role === 'farmer' && data.profile?._id === listing.farmerId;
+	let reserveQty = $state(1);
+	let offerQty = $state(1);
+	let offerPrice = $state('0.00');
+
+	$effect(() => {
+		offerPrice = (listing.pricePerUnitCents / 100).toFixed(2);
+	});
 </script>
 
 <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
@@ -53,8 +59,15 @@
 				<input type="hidden" name="listingId" value={listing._id} />
 				<input type="hidden" name="pricePerUnitCents" value={listing.pricePerUnitCents} />
 				<div>
-					<label class="text-sm font-medium">Quantity</label>
-					<Input type="number" min="1" max={listing.quantityAvailable} bind:value={reserveQty} name="quantity" />
+					<label class="text-sm font-medium" for="reserve-qty">Quantity</label>
+					<Input
+						id="reserve-qty"
+						type="number"
+						min="1"
+						max={listing.quantityAvailable}
+						bind:value={reserveQty}
+						name="quantity"
+					/>
 				</div>
 				<Button class="w-full">Reserve & Pay</Button>
 			</form>
@@ -63,12 +76,28 @@
 				<form method="POST" action="?/submitOffer" class="space-y-3">
 					<input type="hidden" name="listingId" value={listing._id} />
 					<div>
-						<label class="text-sm font-medium">Offer quantity</label>
-						<Input type="number" min="1" max={listing.quantityAvailable} bind:value={offerQty} name="quantity" />
+						<label class="text-sm font-medium" for="offer-qty">Offer quantity</label>
+						<Input
+							id="offer-qty"
+							type="number"
+							min="1"
+							max={listing.quantityAvailable}
+							bind:value={offerQty}
+							name="quantity"
+						/>
 					</div>
 					<div>
-						<label class="text-sm font-medium">Offer price per {listing.unit}</label>
-						<Input type="number" min="0.01" step="0.01" bind:value={offerPrice} name="pricePerUnit" />
+						<label class="text-sm font-medium" for="offer-price">
+							Offer price per {listing.unit}
+						</label>
+						<Input
+							id="offer-price"
+							type="number"
+							min="0.01"
+							step="0.01"
+							bind:value={offerPrice}
+							name="pricePerUnit"
+						/>
 					</div>
 					<Button variant="outline" class="w-full">Submit offer</Button>
 				</form>
@@ -118,8 +147,9 @@
 				<form method="POST" action="?/updateListing" class="grid gap-4 md:grid-cols-2">
 					<input type="hidden" name="listingId" value={listing._id} />
 					<div>
-						<label class="text-sm font-medium">Quantity available</label>
+						<label class="text-sm font-medium" for="listing-qty">Quantity available</label>
 						<Input
+							id="listing-qty"
 							name="quantityAvailable"
 							type="number"
 							min="0"
@@ -128,8 +158,11 @@
 						/>
 					</div>
 					<div>
-						<label class="text-sm font-medium">Price per {listing.unit} ($)</label>
+						<label class="text-sm font-medium" for="listing-price">
+							Price per {listing.unit} ($)
+						</label>
 						<Input
+							id="listing-price"
 							name="pricePerUnit"
 							type="number"
 							step="0.01"

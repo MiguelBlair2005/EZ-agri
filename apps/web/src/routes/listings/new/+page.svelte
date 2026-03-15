@@ -2,8 +2,8 @@
 	import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea, Select } from '$lib/components/ui';
 	import { foodCategoryOptions } from '$lib/spoilage';
 
-	let lat = '';
-	let lng = '';
+	let lat = $state('');
+	let lng = $state('');
 
 	const useBrowserLocation = () => {
 		if (!navigator.geolocation) return;
@@ -25,12 +25,12 @@
 		<form method="POST" action="?/create" class="grid gap-6">
 			<div class="grid gap-4 md:grid-cols-2">
 				<div>
-					<label class="text-sm font-medium">Crop name</label>
-					<Input name="cropName" required />
+					<label class="text-sm font-medium" for="crop-name">Crop name</label>
+					<Input id="crop-name" name="cropName" required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Category</label>
-					<Select name="category" required>
+					<label class="text-sm font-medium" for="category">Category</label>
+					<Select id="category" name="category" required>
 						{#each foodCategoryOptions as option}
 							<option value={option.value}>{option.label}</option>
 						{/each}
@@ -40,44 +40,65 @@
 
 			<div class="grid gap-4 md:grid-cols-3">
 				<div>
-					<label class="text-sm font-medium">Quantity</label>
-					<Input type="number" min="1" name="quantityTotal" required />
+					<label class="text-sm font-medium" for="quantity-total">Quantity</label>
+					<Input id="quantity-total" type="number" min="1" name="quantityTotal" required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Unit</label>
-					<Input name="unit" placeholder="lbs, crates, boxes" required />
+					<label class="text-sm font-medium" for="unit">Unit</label>
+					<Input id="unit" name="unit" placeholder="lbs, crates, boxes" required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Price per unit ($)</label>
-					<Input type="number" step="0.01" min="0.01" name="pricePerUnit" required />
+					<label class="text-sm font-medium" for="price-per-unit">Price per unit ($)</label>
+					<Input
+						id="price-per-unit"
+						type="number"
+						step="0.01"
+						min="0.01"
+						name="pricePerUnit"
+						required
+					/>
 				</div>
 			</div>
 
 			<div class="grid gap-4 md:grid-cols-3">
 				<div>
-					<label class="text-sm font-medium">Pickup window start</label>
-					<Input type="datetime-local" name="pickupWindowStart" required />
+					<label class="text-sm font-medium" for="pickup-start">Pickup window start</label>
+					<Input id="pickup-start" type="datetime-local" name="pickupWindowStart" required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Pickup window end</label>
-					<Input type="datetime-local" name="pickupWindowEnd" required />
+					<label class="text-sm font-medium" for="pickup-end">Pickup window end</label>
+					<Input id="pickup-end" type="datetime-local" name="pickupWindowEnd" required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Expiry date</label>
-					<Input type="date" name="expiryDate" required />
+					<label class="text-sm font-medium" for="expiry-date">Expiry date</label>
+					<Input id="expiry-date" type="date" name="expiryDate" required />
 				</div>
 			</div>
 
 			<div class="grid gap-4 md:grid-cols-2">
 				<div>
-					<label class="text-sm font-medium">Location description</label>
-					<Input name="locationText" placeholder="Farm pickup - Elm Street" required />
+					<label class="text-sm font-medium" for="location-text">Location description</label>
+					<Input id="location-text" name="locationText" placeholder="Farm pickup - Elm Street" required />
 				</div>
 				<div class="grid gap-2">
-					<label class="text-sm font-medium">Coordinates</label>
+					<p class="text-sm font-medium">Coordinates</p>
 					<div class="flex gap-2">
-						<Input name="lat" bind:value={lat} placeholder="Latitude" required />
-						<Input name="lng" bind:value={lng} placeholder="Longitude" required />
+						<Input
+							id="lat"
+							name="lat"
+							bind:value={lat}
+							placeholder="Latitude"
+							aria-label="Latitude"
+							required
+						/>
+						<Input
+							id="lng"
+							name="lng"
+							bind:value={lng}
+							placeholder="Longitude"
+							aria-label="Longitude"
+							required
+						/>
 					</div>
 					<Button variant="outline" type="button" on:click={useBrowserLocation}>
 						Use my location
@@ -87,12 +108,12 @@
 
 			<div class="grid gap-4 md:grid-cols-2">
 				<div>
-					<label class="text-sm font-medium">Photo URL</label>
-					<Input name="photoUrl" placeholder="https://..." required />
+					<label class="text-sm font-medium" for="photo-url">Photo URL</label>
+					<Input id="photo-url" name="photoUrl" placeholder="https://..." required />
 				</div>
 				<div>
-					<label class="text-sm font-medium">Notes (optional)</label>
-					<Textarea name="notes" />
+					<label class="text-sm font-medium" for="notes">Notes (optional)</label>
+					<Textarea id="notes" name="notes" />
 				</div>
 			</div>
 

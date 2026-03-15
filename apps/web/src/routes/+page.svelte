@@ -6,9 +6,14 @@
 
 	let { data } = $props();
 
-	let radiusMiles = data.profile?.radiusMiles ?? 50;
-	let center = data.profile?.location?.lat ? data.profile.location : null;
-	let selectedCategory = 'all';
+	let radiusMiles = $state(50);
+	let center = $state(null);
+	let selectedCategory = $state('all');
+
+	$effect(() => {
+		radiusMiles = data.profile?.radiusMiles ?? 50;
+		center = data.profile?.location?.lat ? data.profile.location : null;
+	});
 
 	const api = anyApi;
 	const listings = useQuery(api.listings.listPublic, () => ({
@@ -49,12 +54,13 @@
 
 		<div class="mt-6 grid gap-6 md:grid-cols-[2fr_1fr]">
 			<div>
-				<label class="text-sm font-medium">Search radius: {radiusMiles} miles</label>
-				<Slider min={5} max={100} step={5} bind:value={radiusMiles} class="mt-3" />
+				<label class="text-sm font-medium" for="radius-miles">Search radius: {radiusMiles} miles</label>
+				<Slider id="radius-miles" min={5} max={100} step={5} bind:value={radiusMiles} class="mt-3" />
 			</div>
 			<div>
-				<label class="text-sm font-medium">Category</label>
+				<label class="text-sm font-medium" for="category">Category</label>
 				<select
+					id="category"
 					class="mt-3 h-10 w-full rounded-md border border-border bg-white px-3 text-sm"
 					bind:value={selectedCategory}
 				>
@@ -83,7 +89,7 @@
 									</Badge>
 								</div>
 								<p class="text-sm text-muted-foreground">
-									{entry.listing.locationText} • {entry.listing.quantityAvailable} {entry.listing.unit} available
+									{entry.listing.locationText} - {entry.listing.quantityAvailable} {entry.listing.unit} available
 								</p>
 							</CardHeader>
 							<CardContent class="space-y-4">
