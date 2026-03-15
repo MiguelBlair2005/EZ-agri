@@ -23,6 +23,7 @@ Real-time marketplace connecting farmers, local consumers, and food banks to red
    - `packages/convex/.env.example` → `packages/convex/.env`
 3. Start Convex (from root)
    - `bun run dev:convex`
+   - If prompted, complete Convex login in this terminal before running `bun run dev`.
 4. Start web app
    - `bun run dev:web`
 
@@ -31,8 +32,9 @@ Real-time marketplace connecting farmers, local consumers, and food banks to red
 
 ## Food spoilage assumptions
 Shelf-life values are based on extension guidance with “best storage” conditions:
-- Kansas State University extension produce storage chart
-- Colorado State University extension storage guide
+- Kansas State University storage charts (MF2465, MF3130)
+- Utah State University extension storage guidance (winter squash)
+- Iowa State University extension storage guidance (onions)
 
 Adjust shelf-life values in:
 - `packages/convex/convex/spoilage.ts`

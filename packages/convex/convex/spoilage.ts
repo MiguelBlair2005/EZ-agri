@@ -9,7 +9,8 @@ export const foodCategories = [
 	'root_vegetables',
 	'potatoes',
 	'alliums',
-	'apples_pears',
+	'apples',
+	'pears',
 	'stone_fruit',
 	'citrus',
 	'summer_squash',
@@ -19,19 +20,20 @@ export const foodCategories = [
 export type FoodCategory = (typeof foodCategories)[number];
 
 export const shelfLifeDaysByCategory: Record<FoodCategory, number> = {
-	leafy_greens: 14,
-	berries: 5,
-	cruciferous: 14,
-	cucumbers: 12,
-	tomatoes: 6,
-	peppers: 14,
-	root_vegetables: 120,
-	potatoes: 120,
-	alliums: 60,
-	apples_pears: 90,
-	stone_fruit: 21,
-	citrus: 21,
-	summer_squash: 10,
+	leafy_greens: 5,
+	berries: 3,
+	cruciferous: 5,
+	cucumbers: 7,
+	tomatoes: 2,
+	peppers: 7,
+	root_vegetables: 14,
+	potatoes: 60,
+	alliums: 28,
+	apples: 30,
+	pears: 5,
+	stone_fruit: 5,
+	citrus: 14,
+	summer_squash: 5,
 	winter_squash: 90
 };
 
