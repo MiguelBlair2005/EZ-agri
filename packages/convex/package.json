@@ -1,0 +1,15 @@
+{
+  "name": "convex",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "convex dev",
+    "deploy": "convex deploy"
+  },
+  "dependencies": {
+    "convex": "^1.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
