@@ -1,4 +1,4 @@
-# EZ-agri — Surplus Crop Marketplace
+# EZ-agri - Surplus Crop Marketplace
 
 Real-time marketplace connecting farmers, local consumers, and food banks to reduce surplus crop waste.
 
@@ -12,15 +12,15 @@ Real-time marketplace connecting farmers, local consumers, and food banks to red
 - Turborepo
 
 ## Workspace layout
-- `apps/web` — SvelteKit frontend + server routes
-- `packages/convex` — Convex schema + functions
+- `apps/web` - SvelteKit frontend + server routes
+- `packages/convex` - Convex schema + functions
 
 ## Setup
 1. Install dependencies
    - `bun install`
 2. Copy `.env.example` files
-   - `apps/web/.env.example` → `apps/web/.env`
-   - `packages/convex/.env.example` → `packages/convex/.env`
+   - `apps/web/.env.example` -> `apps/web/.env`
+   - `packages/convex/.env.example` -> `packages/convex/.env`
 3. Start Convex (from root)
    - `bun run dev:convex`
    - If prompted, complete Convex login in this terminal before running `bun run dev`.
@@ -31,7 +31,7 @@ Real-time marketplace connecting farmers, local consumers, and food banks to red
 `netlify.toml` is configured for monorepo builds. Use the Netlify UI or CLI to set environment variables.
 
 ## Food spoilage assumptions
-Shelf-life values are based on extension guidance with “best storage” conditions:
+Shelf-life values are based on extension guidance with best storage conditions:
 - Kansas State University storage charts (MF2465, MF3130)
 - Utah State University extension storage guidance (winter squash)
 - Iowa State University extension storage guidance (onions)
